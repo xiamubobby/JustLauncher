@@ -23,6 +23,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/view2"
         android:layout_below="@+id/view"
-        android:src="@drawable/test_vector"/>
+        android:src="@drawable/animated_vector"/>
 
 </RelativeLayout>

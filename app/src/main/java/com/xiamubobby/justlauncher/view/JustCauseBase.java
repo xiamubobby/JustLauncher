@@ -51,14 +51,14 @@ public class JustCauseBase extends View {
         if (animator == null) {
             animator = new JustCauseAnimator();
         }
-        setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                startDrag(null, new DragShadowBuilder(JustCauseBase.this), null, 0);
-                invalidate();
-                return false;
-            }
-        });
+//        setOnLongClickListener(new OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                startDrag(null, new DragShadowBuilder(JustCauseBase.this), null, 0);
+//                invalidate();
+//                return false;
+//            }
+//        });
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

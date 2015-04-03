@@ -1,13 +1,18 @@
 package com.xiamubobby.justlauncher.test;
 
 import android.app.Activity;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xiamubobby.justlauncher.R;
 import com.xiamubobby.justlauncher.view.JustCauseBase;
+
+import static android.view.View.*;
 
 public class JLTestActivity extends Activity {
 
@@ -16,6 +21,14 @@ public class JLTestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jltest);
         ((JustCauseBase) (findViewById(R.id.view))).Logger = ((TextView) findViewById(R.id.textView));
+        ((JustCauseBase) (findViewById(R.id.view))).setOnLongClickListener(new OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                ((AnimatedVectorDrawable) ((ImageView) (findViewById(R.id.view2))).getDrawable()).start();
+                return false;
+            }
+        });
     }
 
 
