@@ -1,16 +1,25 @@
 package com.xiamubobby.justlauncher.test;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xiamubobby.justlauncher.R;
+import com.xiamubobby.justlauncher.utility.RawJsonReader;
 import com.xiamubobby.justlauncher.view.JustCauseBase;
+import com.xiamubobby.justlauncher.view.JustCauseBean;
+import com.xiamubobby.justlauncher.view.JustCauseFactory;
+import com.xiamubobby.justlauncher.view.RawJustCauseJsonReader;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import static android.view.View.*;
 
@@ -20,15 +29,25 @@ public class JLTestActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jltest);
-        ((JustCauseBase) (findViewById(R.id.view))).Logger = ((TextView) findViewById(R.id.textView));
-        ((JustCauseBase) (findViewById(R.id.view))).setOnLongClickListener(new OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View v) {
-                ((AnimatedVectorDrawable) ((ImageView) (findViewById(R.id.view2))).getDrawable()).start();
-                return false;
-            }
-        });
+        TextView Logger = ((TextView) findViewById(R.id.textView));
+        JustCauseBean bean = null;
+        try {
+            bean  = RawJustCauseJsonReader.create(this).consume(R.raw.test_json).productAs(JustCauseBean.class);
+            Logger.setText(bean.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        JustCauseBase bb = JustCauseFactory.create(this).makeFrom(bean);
+        bb.setBackgroundColor(Color.BLACK);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(300, 300);
+        params.addRule(RelativeLayout.BELOW, R.id.view2);
+        bb.setLayoutParams(params);
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
+        rl.addView(bb);
     }
 
 

@@ -10,6 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 /**
  * Created by MuSTERLING on 2015/3/26.
  */
@@ -42,32 +45,46 @@ public class JustCauseBase extends View {
             initiate();
         }
         super.onDraw(canvas);
-        canvas.drawRGB((int) (255 * currentFrame),
-                (int) (255 * currentFrame),
-                (int) (255 * currentFrame));
+//        canvas.drawRGB((int) (255 * currentFrame),
+//                (int) (255 * currentFrame),
+//                (int) (255 * currentFrame));
     }
 
     private void initiate() {
         if (animator == null) {
             animator = new JustCauseAnimator();
         }
-//        setOnLongClickListener(new OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                startDrag(null, new DragShadowBuilder(JustCauseBase.this), null, 0);
-//                invalidate();
-//                return false;
-//            }
-//        });
+        setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Class jcb = JustCauseAnimator.class;
+                Method med = null;
+                try {
+                    med = jcb.getDeclaredMethod("light");
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    med.invoke(JustCauseBase.this.animator);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                //startDrag(null, new DragShadowBuilder(JustCauseBase.this), null, 0);
+                //invalidate();
+                return false;
+            }
+        });
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        animator.light();
+                        //animator.light();
                         break;
                     case MotionEvent.ACTION_UP:
-                        animator.delight();
+                        //animator.delight();
                         break;
                 }
                 return false;

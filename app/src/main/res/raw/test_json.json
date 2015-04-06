@@ -1,0 +1,20 @@
+{
+    "name": "test_justCause_svg", 
+    "viewport": {
+        "width": 600, 
+        "height": 600
+    }, 
+    "draws": [
+        {      "type": "argb",
+                "values": [255, 99, 137, 43]
+        },
+        {
+                "type": "rect", 
+                "values": [13, 99, 137, 43]
+        },
+        {
+                "type" : "circle",
+                "values": [300.5, 300.5, 300]
+        }
+    ]
+}
