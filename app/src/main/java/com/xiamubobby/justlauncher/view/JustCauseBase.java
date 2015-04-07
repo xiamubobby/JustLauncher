@@ -3,6 +3,7 @@ package com.xiamubobby.justlauncher.view;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+
+import parsii.eval.Expression;
+import parsii.eval.Scope;
 
 /**
  * Created by MuSTERLING on 2015/3/26.
@@ -36,7 +41,7 @@ public class JustCauseBase extends View {
     private boolean initialed = false;
     private float currentFrame = 0;
     private JustCauseAnimator animator;
-
+    protected HashMap<String, Object> variables = new HashMap<>();
     public TextView Logger;
 
     @Override
@@ -137,6 +142,16 @@ public class JustCauseBase extends View {
                 }
             });
             animator.start();
+        }
+    }
+
+    protected class AnimationValueCalculator {
+        Scope scope;
+        Expression expr;
+        HashMap<String, Object> variables;
+        private AnimationValueCalculator() {
+            this.scope = Scope.create();
+            this.expr = null;
         }
     }
 }

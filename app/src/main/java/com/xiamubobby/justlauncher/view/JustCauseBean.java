@@ -8,6 +8,7 @@ import java.util.List;
 public class JustCauseBean {
     String name = "";
     ViewPort viewport = null;
+    List<String> variables = null;
     List<Draw> draws = null;
 
     public class ViewPort {
@@ -17,12 +18,12 @@ public class JustCauseBean {
 
     public class Draw {
         String type;
-        List<Float> values;
+        List<Object> values;
         Paint paint;
         public class Paint {
-            List<Integer> argb;
+            List<Object> argb;
             Float strokewidth;
-            Integer paintstyle;
+            String paintstyle;
             Integer paintcap;
             Integer paintjoin;
         }

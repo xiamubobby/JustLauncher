@@ -3,18 +3,23 @@
     "viewport": {
         "width": 600, 
         "height": 600
-    }, 
+    },
+    "variables" : ["offset"],
     "draws": [
         {      "type": "argb",
-                "values": [255, 99, 137, 43]
+                "values": ["255", "99", "137", "43"]
         },
         {
                 "type": "rect", 
-                "values": [13, 99, 137, 43]
+                "values": ["13", "99", "137", "43"]
         },
         {
                 "type" : "circle",
-                "values": [300.5, 300.5, 300]
+                "values": ["300.5+offset", "300.5", "300"],
+                "paint" : {
+                    "argb" : ["255", "255", "255", "0"],
+                    "paintstyle" : "FILL_AND_STROKE"
+                }
         }
     ]
 }
