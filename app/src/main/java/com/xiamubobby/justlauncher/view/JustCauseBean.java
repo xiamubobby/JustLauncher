@@ -18,10 +18,10 @@ public class JustCauseBean {
 
     public class Draw {
         String type;
-        List<Object> values;
+        List<String> values;
         Paint paint;
         public class Paint {
-            List<Object> argb;
+            List<String> argb;
             Float strokewidth;
             String paintstyle;
             Integer paintcap;

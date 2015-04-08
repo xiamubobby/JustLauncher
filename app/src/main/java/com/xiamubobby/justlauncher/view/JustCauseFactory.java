@@ -2,18 +2,13 @@ package com.xiamubobby.justlauncher.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 
-import java.text.ParseException;
-import java.util.HashMap;
 import java.util.List;
 
 import parsii.eval.Expression;
 import parsii.eval.Parser;
 import parsii.eval.Scope;
-import parsii.eval.Variable;
 
 /**
  * Created by MuSTERMIND on 2015/4/6.
@@ -45,34 +40,15 @@ public class JustCauseFactory {
                     canvasPaint = (temp.paint == null) ? (new Paint()) : makePaint(temp.paint);
                     switch (temp.type) {
                         case "argb":
-                            assert (temp.values.size() >= 4);
-//                            canvas.drawARGB(temp.values.get(0).intValue(),
-//                                    temp.values.get(1).intValue(),
-//                                    temp.values.get(2).intValue(),
-//                                    temp.values.get(3).intValue());
+                            //canvas.drawARGB(255, 128, 30, 68);
+                            justCauseCanvasDrawer.drawARGB(temp.values);
                             break;
                         case "rect" :
-                            assert (temp.values.size() >= 4);
-//                            canvas.drawRect(temp.values.get(0),
-//                                    temp.values.get(1),
-//                                    temp.values.get(2),
-//                                    temp.values.get(3),
-//                                    canvasPaint);
+                            justCauseCanvasDrawer.drawRect(temp.values, canvasPaint);
                             break;
                         case "circle":
-                            assert (temp.values.size() >= 3);
-                            Scope scope = Scope.create();
-                            scope.getVariable("offset").setValue(400);
-                            Expression expr = null;
-                            try {
-                                expr = Parser.parse(temp.values.get(0), scope);
-                            } catch (parsii.tokenizer.ParseException e) {
-                                e.printStackTrace();
-                            }
-                            canvas.drawCircle((float) expr.evaluate()/viewportWidth*viewWidth,
-                                    Float.valueOf(temp.values.get(1))/viewportWidth*viewWidth,
-                                    Float.valueOf(temp.values.get(2))/viewportWidth*viewWidth,
-                                    canvasPaint);
+                            justCauseCanvasDrawer.drawCircle( temp.values, canvasPaint);
+                            break;
                     }
                 }
             }
@@ -92,9 +68,7 @@ public class JustCauseFactory {
                 return retPaint;
             }
         };
-        for (String varName : bean.variables) {
-            ret.variables.put(varName, 0f);
-        }
+        ret.setUpAniVars(bean.variables);
         return ret;
     }
 
