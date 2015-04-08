@@ -40,7 +40,6 @@ public class JustCauseFactory {
                     canvasPaint = (temp.paint == null) ? (new Paint()) : makePaint(temp.paint);
                     switch (temp.type) {
                         case "argb":
-                            //canvas.drawARGB(255, 128, 30, 68);
                             justCauseCanvasDrawer.drawARGB(temp.values);
                             break;
                         case "rect" :
